@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../static/css/summarization.css">
+        <link rel="icon" href="../static/images/fevicon.jpg" type="image/x-icon">
+        <title>Text Summarizer</title>
+    </head>
+    <body class="vh-120" style="background-color: #9A616D;">
+        <div class="container mt-5 h-120 background">
+            <div class="row">
+                <div class="col-md-6 text-center mb-4 mt-4">
+                    <h2 class="mb-4">Input Text</h2>
+                    <div class="mb-3" id="dropArea">
+                        <textarea class="form-control" id="textInput" rows="8" placeholder="Enter or paste your text here..." ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)"></textarea>
+                    </div>
+                    <div class="d-md-flex justify-content-between">
+                        <label for="file" class="btn btn-dark col-12 col-md-4 mb-2 mb-md-0">Upload</label>
+                        <input type="file" id="file" name="file" accept=".txt, .pdf, .docx" style="display: none;" class="col-12 col-md-4 mb-2 mb-md-0" multiple="false">
+                        <button class="btn btn-dark col-12 col-md-4" id="summarizeButton" onclick="summarizeText()">Summarize</button>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center mb-4 mt-4">
+                    <h2 class="mb-4">Summarized Text</h2>
+                    <div class="mb-3">
+                        <textarea class="form-control" id="summarizedText" rows="8" placeholder="Your summarized text will appear here..." readonly></textarea>
+                    </div>
+                    <button class="btn btn-dark col-12 col-md-4" id="download">Download</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="invalidFileModal" tabindex="-1" role="dialog" aria-labelledby="invalidFileModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="invalidFileModalLabel">Invalid File Format</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        The uploaded file must be in .txt or .pdf or .docx format.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="errorModalLabel">Upload or type text</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Please enter or upload the text before summarization.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="errorSummarizedTextModal" tabindex="-1" role="dialog" aria-labelledby="errorSummarizedTextModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="errorSummarizedTextModalLabel">Upload or type text</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Text is not summarized, please upload or type the text.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Include jQuery before Bootstrap JavaScript -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- pdfjs-dist -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+        <!-- pdf-lib -->
+        <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.10.0/dist/pdf-lib.js"></script>
+        <!-- mammoth-lib -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js" integrity="sha512-sG5Q7boJL+ft/weuz6Mmi9XBD+bEzE9AI2FMP4YMFxp3FpTFUQSQQm5K5cSgJCyed6bWs3W8f8h0lp36lHXhQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- Add this script tag to include pdfmake -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/vfs_fonts.js"></script>
+        <script src="../static/js/summarization.js"></script>
+    </body>
+</html>
