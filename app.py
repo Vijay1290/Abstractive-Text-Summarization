@@ -175,7 +175,7 @@ with open('Summarized_Model//x_tokenizer.pickle', 'rb') as handle:
 with open('Summarized_Model//y_tokenizer.pickle', 'rb') as handle:
     y_tokenizer = pickle.load(handle)
 
-model = load_model("Summarized_Model//model.h5", custom_objects={'AttentionLayer': AttentionLayer})
+model = load_model("Summarized_Model//encoder_model.h5", custom_objects={'AttentionLayer': AttentionLayer})
 
 
 with open('Summarized_Model//model_info.pickle', 'rb') as handle:
